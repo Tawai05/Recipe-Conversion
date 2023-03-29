@@ -6,26 +6,26 @@
   
   TIP: Use assessment guide to help guide you through this Internal
 '''
+
 recipe_name = input("Enter the recipe name: ")
 serving_size = int(input("Enter the serving size: "))
 
-ingredients = []
+# create an empty dictionary to store ingredients
+ingredients = {}
 
+# prompt the user to add ingredients
 while True:
-    ingredient = input("Enter an ingredient (or 'done' to finish): ")
-    if ingredient == 'done':
+    ingredient_name = input("Enter ingredient name (or 'done' to quit): ")
+    if ingredient_name == 'done':
         break
-    amount = float(input("Enter the amount needed: "))
-    cost_per_unit = float(input("Enter the cost per unit: "))
-    ingredients.append((ingredient, amount, cost_per_unit))
+    quantity = input("Enter quantity: ")
+    ingredients.update({ingredient_name: quantity})
 
-total_cost = sum(amount * cost for _, amount, cost in ingredients)
+total_cost = sum(info["quantity"] * info["price"] for info in ingredients.values())
 cost_per_serving = total_cost / serving_size
 
-print(f"Recipe Name: {recipe_name}")
-print(f"Serving Size: {serving_size}")
 print("Ingredients:")
-for ingredient, amount, cost_per_unit in ingredients:
-    print(f"- {amount} {ingredient} @ ${cost_per_unit:.2f} each")
-print(f"Cost Per Serving: ${cost_per_serving:.2f}")
-print(f"Total Cost: ${total_cost:.2f}")
+for name, info in ingredients.items():
+    quantity = info["quantity"]
+    price_per_unit = info["price"]
+    print(f"- {quantity} {name} @ ${price_per_unit:.2f} each")
