@@ -19,7 +19,9 @@ while True:
     if ingredient_name == 'done':
         break
     quantity = input("Enter quantity: ")
+    price = input("Enter price: ")
     ingredients.update({ingredient_name: quantity})
+    ingredients.update({ingredient_name: price})
 
 total_cost = sum(info["quantity"] * info["price"] for info in ingredients.values())
 cost_per_serving = total_cost / serving_size
